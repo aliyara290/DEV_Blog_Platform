@@ -1,0 +1,15 @@
+{
+    "name": "youcode/dev.io",
+    "autoload": {
+        "psr-4": {
+            "Youcode\\DevIo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ali Yara",
+            "email": "ali.yara.fr@gmail.com"
+        }
+    ],
+    "require": {}
+}
