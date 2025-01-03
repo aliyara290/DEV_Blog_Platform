@@ -20,6 +20,7 @@ CREATE TABLE admin (
     FOREIGN KEY (id) REFERENCES users (id)
 );
 
+
 CREATE TABLE author (
     id INT,
     bio TEXT,
