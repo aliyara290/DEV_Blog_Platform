@@ -8,5 +8,15 @@ userPic.forEach((pic) => {
     });
   });
 });
-console.log(userPic);
-console.log(setMenu);
+
+// custom file input
+const fileInput = document.querySelector('.file-input');
+const fileName = document.querySelector('.file-name');
+
+fileInput.addEventListener('change', function () {
+  if (this.files && this.files[0]) {
+    fileName.textContent = this.files[0].name;
+  } else {
+    fileName.textContent = 'No file chosen';
+  }
+});

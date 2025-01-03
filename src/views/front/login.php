@@ -10,7 +10,7 @@
 <header class="header_content">
       <div class="left__side-nav">
         <div class="logo">
-          <a href="./index.php">
+        <a href="./index.php">
             <h1>Medium</h1>
           </a>
         </div>
@@ -23,32 +23,46 @@
           <div class="logs_buttons">
             <li class="page_link">
               <a href="./login.php">
-                <button>Sign in</button>
+                <button class="button__comp button__border">Sign in</button>
               </a>
             </li>
             <li class="page_link">
               <a href="./register.php">
-                <button>Sign up</button>
+                <button class="button__comp">Sign up</button>
               </a>
             </li>
           </div>
           <li class="page_link">
             <a href="#">
-              <button>Create Article</button>
+              <button class="button__comp">Create Article</button>
             </a>
           </li>
           <li class="page_link">
-            <div class="user_picture">
+            <div class="user_picture user__pic-nav">
               <div class="u__pic">
                 <img src="../../../assets/images/users/me.jpg" alt="" />
               </div>
             </div>
             <div class="acc_menu">
               <ul class="menu_list">
-                <li class="menu_item"><a href="#">My Profile</a></li>
-                <li class="menu_item"><a href="#">My Articles</a></li>
+                <li class="menu_item">
+                  <a href="./profile/user.php" class="acc_us">
+                    <span> Ali Yara </span>
+                    <span> @aliyara29 </span>
+                  </a>
+                </li>
+                <div class="acc__line"></div>
+
+                <li class="menu_item"><a href="#">Setting</a></li>
+                <li class="menu_item"><a href="#">Create post</a></li>
                 <li class="menu_item"><a href="#">Statistic</a></li>
-                <li class="menu_item"><a href="#">Log out</a></li>
+                <div class="acc__line"></div>
+                <li class="menu_item">
+                  <button class="logout_us">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Log out</span>
+                  </button>
+                </li>
               </ul>
             </div>
           </li>
@@ -87,6 +101,6 @@
           </div>
       
 </section>
-
+<script src="../../../assets/js/main.js"></script>
 </body>
 </html>

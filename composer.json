@@ -2,7 +2,7 @@
     "name": "youcode/dev.io",
     "autoload": {
         "psr-4": {
-            "Youcode\\DevIo\\": "src/"
+            "DevIo\\": "src/"
         }
     },
     "authors": [
@@ -11,5 +11,7 @@
             "email": "ali.yara.fr@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
 }

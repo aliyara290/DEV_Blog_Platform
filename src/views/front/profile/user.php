@@ -14,7 +14,9 @@
     <header class="header_content">
       <div class="left__side-nav">
         <div class="logo">
-          <h1>Medium</h1>
+            <a href="../index.php">
+                <h1>Medium</h1>
+              </a>
         </div>
         <div class="search__bar">
           <input type="text" placeholder="Search for article..." />
@@ -24,12 +26,12 @@
         <ul class="links_list">
           <div class="logs_buttons">
             <li class="page_link">
-              <a href="./login.php">
+              <a href="../login.php">
                 <button class="button__comp button__border">Sign in</button>
               </a>
             </li>
             <li class="page_link">
-              <a href="./register.php">
+              <a href="../register.php">
                 <button class="button__comp">Sign up</button>
               </a>
             </li>
@@ -55,7 +57,7 @@
                 </li>
                 <div class="acc__line"></div>
 
-                <li class="menu_item"><a href="#">Dashboard</a></li>
+                <li class="menu_item"><a href="#">Setting</a></li>
                 <li class="menu_item"><a href="#">Create post</a></li>
                 <li class="menu_item"><a href="#">Statistic</a></li>
                 <div class="acc__line"></div>
@@ -82,7 +84,7 @@
             <img src="../../../../assets/images/users/me.jpg" alt="Ali Yara" />
           </div>
           <div class="prof__edit-btn">
-            <a href="#">
+            <a href="../setting/profile.php">
               <button class="button__comp">Edit profile</button>
             </a>
           </div>
