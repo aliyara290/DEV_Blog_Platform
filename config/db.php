@@ -1,31 +1,36 @@
 <?php
-require "../public/index.php";
+    require_once __DIR__ . "/../vendor/autoload.php";
+
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
 
 class Database {
-private $dsn;
-private $username;
-private $password;
-private $pdo;
+    private static $instance = null; 
+    private $pdo;
 
-public function __construct() {
-    $this->dsn = $_ENV["DB_DSN"];
-    $this->username = $_ENV["DB_USER"];
-    $this->password = $_ENV["DB_PASSWORD"];
-    $this->connect();
-}
-public function connect() {
-    try {
-        $this->pdo = new PDO($this->dsn, $this->username, $this->password);
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "Success";
-    } catch(PDOException $error) {
-        echo "failed to connect: " . $error->getMessage();
+    private function __construct() {
+        $dsn = $_ENV["DB_DSN"];
+        $username = $_ENV["DB_USER"];
+        $password = $_ENV["DB_PASSWORD"];
+
+        try {
+            $this->pdo = new PDO($dsn, $username, $password);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $error) {
+            die("Failed to connect: " . $error->getMessage());
+        }
+    }
+
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new Database();
+        }
+
+        return self::$instance;
+    }
+    public function getConnection() {
+        return $this->pdo;
     }
 }
-public function getConnection() {
-    return $this->pdo;
-}
-}
-
-$co = new Database();
-$co->getConnection();

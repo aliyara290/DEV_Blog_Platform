@@ -1,13 +1,8 @@
-<?php
+<?php 
 
-require __DIR__ . "/../../controllers/CategoryControl.php";
-
-Category::addNewCategory();
-
-$categories = Category::showAllCategories();
-
-$total = Category::countAllCategories();
-
+require __DIR__ .  "/../../controllers/TagControl.php";
+Tag::updateOldTag();
+$tagName = Tag::showTagById($_GET["id"]);
 ?>
 
 <!DOCTYPE html>
@@ -50,13 +45,13 @@ $total = Category::countAllCategories();
                 <span>Articles</span>
               </a>
             </li>
-            <li class="page_item ">
+            <li class="page_item">
               <a href="./tags.php">
                 <span><i class="fa-solid fa-tag"></i></span>
                 <span>tags</span>
               </a>
             </li>
-            <li class="page_item active">
+            <li class="page_item">
               <a href="./categories.php">
                 <span><i class="fa-brands fa-dev"></i></span>
                 <span>categories</span>
@@ -74,50 +69,21 @@ $total = Category::countAllCategories();
 
         <div class="cls__content">
           <div class="heading">
-            <h1>Add new Category</h1>
+            <h1>Update tag</h1>
           </div>
           <div class="add__cls">
-            <form action="categories.php" method="post" class="form__content">
+            <form action="updateTag.php" method="post" class="form__content">
               <div class="form__input">
-                <label for="category__name">Category Name</label>
-                <input type="text" name="category__name" placeholder="Tag name" />
+                  <input type="hidden" value=<?= $_GET["id"] ?> name="tagId" />
+                <label for="new_tag-name">New tag name</label>
+                <input type="text" name="new_tag-name" placeholder="New tag name" />
               </div>
               <div class="submit_btn">
-                <button type="submit">Add</button>
+                <button type="submit" name="update" style="background-color: green;">Update</button>
               </div>
             </form>
           </div>
         </div>
-        <section class="cls__section">
-          <div class="heading">
-            <h1>Categories list (<?= $total ?>)</h1>
-          </div>
-          <ul class="cls__list">
-            <?php 
-
-              foreach($categories as $category): ?>
-                <li class="cls__card">
-                  <div class="cls__name">
-                    <span><span>#</span><span><?= $category["categoryName"] ?></span></span>
-                  </div>
-                  <div class="cls__management">
-                    <span>
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </span>
-                    <span>
-                      <i class="fa-solid fa-trash-can"></i>
-                    </span>
-                  </div>
-                </li>
-
-                <?php 
-                endforeach;
-                ?>
-
-           
-            
-          </ul>
-        </section>
       </main>
     </div>
   </body>

@@ -1,0 +1,86 @@
+<?php
+require __DIR__ . "/../../config/db.php";
+
+class Crud {
+    private static $pdo;
+
+    public function __construct() {
+        $database = Database::getInstance();
+        self::$pdo = $database->getConnection();
+    }
+
+    public static function create($table, $data) {
+        $columns = implode(",", array_keys($data));
+        $values = implode(",", array_map(fn($col) => ":$col", array_keys($data)));
+        $sql = "INSERT INTO $table ($columns) VALUES ($values)";
+
+        try {
+            $stmt = self::$pdo->prepare($sql);
+            $stmt->execute($data);
+        } catch (PDOException $error) {
+            echo "Failed to insert data: " . $error->getMessage();
+        }
+    }
+
+    public static function update($table, $data, $condition, $cond_value) {
+        $columns = implode(",", array_map(fn($col) => "$col = :$col", array_keys($data)));
+        $sql = "UPDATE $table SET $columns WHERE $condition = :condition_value";
+
+        try {
+            $stmt = self::$pdo->prepare($sql);
+            $data["condition_value"] = $cond_value;
+            $stmt->execute($data);
+        } catch (PDOException $error) {
+            echo "Failed to update data: " . $error->getMessage();
+        }
+    }
+
+    public static function delete($table, $condition, $cond_value) {
+        $sql = "DELETE FROM $table WHERE $condition = :id";
+        try {
+            $stmt = self::$pdo->prepare($sql);
+            $stmt->execute(["id" => $cond_value]);
+        } catch (PDOException $error) {
+            echo "Failed to delete data: " . $error->getMessage();
+        }
+    }
+
+    public static function readByCondition($table, $condition, $cond_value) {
+        $sql = "SELECT * FROM $table WHERE $condition = :id";
+        try {
+            $stmt = self::$pdo->prepare($sql);
+            $stmt->execute(["id" => $cond_value]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $error) {
+            echo "Failed to fetch data: " . $error->getMessage();
+        }
+    }
+
+    public static function readAll($table) {
+        $sql = "SELECT * FROM $table";
+        try {
+            $stmt = self::$pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $error) {
+            echo "Failed to fetch data: " . $error->getMessage();
+        }
+    }
+
+    public static function count($table) {
+        $sql = "SELECT COUNT(*) AS total FROM $table";
+        try {
+            $stmt = self::$pdo->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'];
+        } catch (PDOException $error) {
+            echo "Failed to count data: " . $error->getMessage();
+            return 0;
+        }
+    }
+    
+}
+
+// Usage example:
+$ob = new Crud();

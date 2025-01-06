@@ -11,71 +11,9 @@
     <title>Sign in</title>
   </head>
   <body>
-  <header class="header_content">
-      <div class="left__side-nav">
-        <div class="logo">
-          <a href="./index.php">
+  <?php include "../../includes/header.php" ?>
 
-            <h1>Medium</h1>
-          </a>
-        </div>
-        <div class="search__bar">
-          <input type="text" placeholder="Search for article..." />
-        </div>
-      </div>
-      <nav class="navbar_content">
-        <ul class="links_list">
-          <div class="logs_buttons">
-            <li class="page_link">
-              <a href="./login.php">
-                <button class="button__comp button__border">Sign in</button>
-              </a>
-            </li>
-            <li class="page_link">
-              <a href="./register.php">
-                <button class="button__comp">Sign up</button>
-              </a>
-            </li>
-          </div>
-          <li class="page_link">
-            <a href="#">
-              <button class="button__comp">Create Article</button>
-            </a>
-          </li>
-          <li class="page_link">
-            <div class="user_picture user__pic-nav">
-              <div class="u__pic">
-                <img src="../../../assets/images/users/me.jpg" alt="" />
-              </div>
-            </div>
-            <div class="acc_menu">
-              <ul class="menu_list">
-                <li class="menu_item">
-                  <a href="./profile/user.php" class="acc_us">
-                    <span> Ali Yara </span>
-                    <span> @aliyara29 </span>
-                  </a>
-                </li>
-                <div class="acc__line"></div>
-
-                <li class="menu_item"><a href="./setting/profile.php">Setting</a></li>
-                <li class="menu_item"><a href="#">Create post</a></li>
-                <li class="menu_item"><a href="#">Statistic</a></li>
-                <div class="acc__line"></div>
-                <li class="menu_item">
-                  <button class="logout_us">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Log out</span>
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </nav>
-    </header>
-
-    <div class="article__page-content">
+    <di v class="article__page-content">
       <main class="article__content">
         <div class="art_pic">
           <img src="../../../assets/images/posts/post_img.png" alt="" />
@@ -167,7 +105,7 @@
           </div>
         </header>
       </aside>
-    </div>
+    </di>
     <footer class="footer">
       <div class="footer-container">
         <p class="footer-text">&copy; 2025 <span class="footer-brand">Medium</span>. All rights reserved.</p>

@@ -13,13 +13,11 @@ CREATE TABLE users (
     PRIMARY KEY (id)
 );
 
-
 CREATE TABLE admin (
     id INT,
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES users (id)
 );
-
 
 CREATE TABLE author (
     id INT,

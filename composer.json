@@ -2,7 +2,8 @@
     "name": "youcode/dev.io",
     "autoload": {
         "psr-4": {
-            "DevIo\\": "src/"
+            "App\\": "src/",
+            "Config\\": "Config/"
         }
     },
     "authors": [
