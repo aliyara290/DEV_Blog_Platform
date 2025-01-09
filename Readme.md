@@ -77,34 +77,6 @@ Welcome to **Dev_Blog_Platform**, a PHP-based blogging platform built using Obje
 
 ---
 
-## Project Structure
-
-The project is organized as follows:
-
-```
-DEV_Blog_Platform/
-│
-├── app/
-│   ├── controllers/     # Controllers for handling user and blog logic
-│   ├── models/          # Models for database interaction
-│   ├── views/           # Views (HTML templates)
-│   └── core/            # Core classes (e.g., BaseController, Database)
-│
-├── config/
-│   └── database.php     # Database configuration
-│
-├── public/
-│   ├── css/             # CSS files
-│   ├── js/              # JavaScript files
-│   └── index.php        # Entry point
-│
-├── .htaccess            # URL rewriting for clean URLs
-├── README.md            # Project documentation
-└── database.sql         # SQL file for database setup
-```
-
----
-
 ## Contributing
 
 Contributions are welcome! If you find any issues or want to add new features, feel free to:
