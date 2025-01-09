@@ -13,14 +13,17 @@ class Crud {
         $columns = implode(",", array_keys($data));
         $values = implode(",", array_map(fn($col) => ":$col", array_keys($data)));
         $sql = "INSERT INTO $table ($columns) VALUES ($values)";
-
+    
         try {
             $stmt = self::$pdo->prepare($sql);
             $stmt->execute($data);
+            return true; 
         } catch (PDOException $error) {
-            echo "Failed to insert data: " . $error->getMessage();
+            error_log("Failed to insert data: " . $error->getMessage());
+            return false; 
         }
     }
+    
 
     public static function update($table, $data, $condition, $cond_value) {
         $columns = implode(",", array_map(fn($col) => "$col = :$col", array_keys($data)));
@@ -30,8 +33,10 @@ class Crud {
             $stmt = self::$pdo->prepare($sql);
             $data["condition_value"] = $cond_value;
             $stmt->execute($data);
+            return true; 
         } catch (PDOException $error) {
             echo "Failed to update data: " . $error->getMessage();
+            return false; 
         }
     }
 
@@ -40,8 +45,10 @@ class Crud {
         try {
             $stmt = self::$pdo->prepare($sql);
             $stmt->execute(["id" => $cond_value]);
+            return true; 
         } catch (PDOException $error) {
             echo "Failed to delete data: " . $error->getMessage();
+            return false; 
         }
     }
 
@@ -53,6 +60,7 @@ class Crud {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $error) {
             echo "Failed to fetch data: " . $error->getMessage();
+            return false; 
         }
     }
 
@@ -64,6 +72,7 @@ class Crud {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $error) {
             echo "Failed to fetch data: " . $error->getMessage();
+            return false; 
         }
     }
 
@@ -82,5 +91,4 @@ class Crud {
     
 }
 
-// Usage example:
-$ob = new Crud();
+$newCrud = new Crud();

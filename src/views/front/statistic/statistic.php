@@ -43,8 +43,17 @@
           </li>
           <li class="page_link">
             <div class="user_picture user__pic-nav">
-              <div class="u__pic">
-                <img src="../../../../assets/images/users/me.jpg" alt="" />
+            <div class="u__pic">
+                <?php 
+                if(isset($_SESSION["user"]["userPic"])):?>
+                <img src="../../<?= $_SESSION["user"]["userPic"] ?>" alt="<?= $_SESSION["user"]["fullName"] ?>">
+                <?php 
+                else:
+                  ?>
+                  <span><?= substr($_SESSION["user"]["fullName"], 0, 1) ?></span>
+                  <?php 
+                  endif;
+                  ?>
               </div>
             </div>
             <div class="acc_menu">

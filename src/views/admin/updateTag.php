@@ -1,8 +1,10 @@
 <?php 
+require __DIR__ . "/../../middleware/Authorisation.php";
+require __DIR__ .  "/../../controllers/TagController.php";
 
-require __DIR__ .  "/../../controllers/TagControl.php";
-Tag::updateOldTag();
-$tagName = Tag::showTagById($_GET["id"]);
+$tagIns = new TagController();
+$tagIns->updateOldTag();
+$tagName = $tagIns->showTagById($_GET["id"]);
 ?>
 
 <!DOCTYPE html>
@@ -61,11 +63,18 @@ $tagName = Tag::showTagById($_GET["id"]);
         </div>
       </aside>
       <main class="main__content">
-        <header class="main__header">
-          <nav class="navbar__content">
-            <span><i class="fa-solid fa-right-from-bracket"></i></span>
-          </nav>
-        </header>
+      <header class="main__header">
+                <nav class="navbar__content">
+                <a href="../front/index.php">
+                    <span><i class="fa-solid fa-house"></i></span>
+                </a>
+                <a href="../../controllers/Logout.php">
+                    <span>
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                    </span>
+                </a>
+                </nav>
+            </header>
 
         <div class="cls__content">
           <div class="heading">

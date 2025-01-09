@@ -1,5 +1,6 @@
 <?php
-    require_once __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../vendor/autoload.php";
+// require_once __DIR__ . "/../vendor/autoload.php";
 
 use Dotenv\Dotenv;
 
@@ -25,7 +26,7 @@ class Database {
 
     public static function getInstance() {
         if (self::$instance === null) {
-            self::$instance = new Database();
+            self::$instance = new self();
         }
 
         return self::$instance;

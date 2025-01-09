@@ -1,12 +1,7 @@
 <?php
+require __DIR__ . "/../../middleware/Authorisation.php";
+require __DIR__ . "/../../controllers/CategoryController.php";
 
-require __DIR__ . "/../../controllers/CategoryControl.php";
-
-Category::addNewCategory();
-
-$categories = Category::showAllCategories();
-
-$total = Category::countAllCategories();
 
 ?>
 
@@ -66,11 +61,18 @@ $total = Category::countAllCategories();
         </div>
       </aside>
       <main class="main__content">
-        <header class="main__header">
-          <nav class="navbar__content">
-            <span><i class="fa-solid fa-right-from-bracket"></i></span>
-          </nav>
-        </header>
+      <header class="main__header">
+                <nav class="navbar__content">
+                <a href="../front/index.php">
+                    <span><i class="fa-solid fa-house"></i></span>
+                </a>
+                <a href="../../controllers/Logout.php">
+                    <span>
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                    </span>
+                </a>
+                </nav>
+            </header>
 
         <div class="cls__content">
           <div class="heading">
@@ -98,24 +100,24 @@ $total = Category::countAllCategories();
               foreach($categories as $category): ?>
                 <li class="cls__card">
                   <div class="cls__name">
-                    <span><span>#</span><span><?= $category["categoryName"] ?></span></span>
+                    <span><?= $category["categoryName"] ?></span>
                   </div>
                   <div class="cls__management">
                     <span>
-                      <i class="fa-solid fa-pen-to-square"></i>
+                      <a href="./updateCategory.php?id=<?= $category["categoryId"] ?>">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </a>
                     </span>
                     <span>
-                      <i class="fa-solid fa-trash-can"></i>
+                      <a href="./categories.php?action=deleteCategory&catId=<?= $category["categoryId"] ?>">
+                        <i class="fa-solid fa-trash-can"></i>
+                      </a>
                     </span>
                   </div>
                 </li>
-
                 <?php 
                 endforeach;
                 ?>
-
-           
-            
           </ul>
         </section>
       </main>

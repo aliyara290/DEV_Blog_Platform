@@ -1,9 +1,8 @@
 <?php 
+require __DIR__ . "/../../middleware/Authorisation.php";
+require __DIR__ .  "/../../controllers/TagController.php";
 
-require __DIR__ .  "/../../controllers/TagControl.php";
-Tag::addNewTag();
-$tags = Tag::showAllTags();
-$total = Tag::countAllTags();
+
 ?>
 
 <!DOCTYPE html>
@@ -62,11 +61,18 @@ $total = Tag::countAllTags();
         </div>
       </aside>
       <main class="main__content">
-        <header class="main__header">
-          <nav class="navbar__content">
-            <span><i class="fa-solid fa-right-from-bracket"></i></span>
-          </nav>
-        </header>
+      <header class="main__header">
+                <nav class="navbar__content">
+                <a href="../front/index.php">
+                    <span><i class="fa-solid fa-house"></i></span>
+                </a>
+                <a href="../../controllers/Logout.php">
+                    <span>
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                    </span>
+                </a>
+                </nav>
+            </header>
 
         <div class="cls__content">
           <div class="heading">
@@ -103,7 +109,9 @@ $total = Tag::countAllTags();
                       </a>
                     </span>
                     <span>
-                      <i class="fa-solid fa-trash-can"></i>
+                      <a href="./tags.php?action=deleteTag&tagId=<?= $tag["tagId"] ?>">
+                        <i class="fa-solid fa-trash-can"></i>
+                      </a>
                     </span>
                   </div>
                 </li>

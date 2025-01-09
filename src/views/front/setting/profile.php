@@ -1,3 +1,11 @@
+<?php 
+// session_start();
+require __DIR__ . "/../../../controllers/ProfileController.php";
+if (!isset($_SESSION["user"])) {
+  header("Location: /deV.io/src/views/front/login.php");
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,40 +19,39 @@
     <title>Dev.to platform</title>
   </head>
   <body>
-    <header class="header_content">
+  <header class="header_content">
       <div class="left__side-nav">
         <div class="logo">
           <a href="../index.php">
+
             <h1>Medium</h1>
           </a>
-        </div>
-        <div class="search__bar">
-          <input type="text" placeholder="Search for article..." />
         </div>
       </div>
       <nav class="navbar_content">
         <ul class="links_list">
-          <div class="logs_buttons">
-            <li class="page_link">
-              <a href="../login.php">
-                <button class="button__comp button__border">Sign in</button>
-              </a>
-            </li>
-            <li class="page_link">
-              <a href="../register.php">
-                <button class="button__comp">Sign up</button>
-              </a>
-            </li>
-          </div>
+          <?php 
+
+          if(isset($_SESSION["user"])): ?>
+          
           <li class="page_link">
-            <a href="#">
+            <a href="../article/new.php">
               <button class="button__comp">Create Article</button>
             </a>
           </li>
           <li class="page_link">
             <div class="user_picture user__pic-nav">
-              <div class="u__pic">
-                <img src="../../../../assets/images/users/me.jpg" alt="" />
+            <div class="u__pic">
+                <?php 
+                if(isset($_SESSION["user"]["userPic"])):?>
+                <img src="../../<?= $_SESSION["user"]["userPic"] ?>" alt="<?= $_SESSION["user"]["fullName"] ?>">
+                <?php 
+                else:
+                  ?>
+                  <span><?= substr($_SESSION["user"]["fullName"], 0, 1) ?></span>
+                  <?php 
+                  endif;
+                  ?>
               </div>
             </div>
             <div class="acc_menu">
@@ -57,22 +64,57 @@
                 </li>
                 <div class="acc__line"></div>
 
-                <li class="menu_item"><a href="../profile/user.php">Setting</a></li>
-                <li class="menu_item"><a href="#">Create post</a></li>
-                <li class="menu_item"><a href="#">Statistic</a></li>
+                <li class="menu_item"><a href="../setting/profile.php">
+                <span><i class="fa-solid fa-gear"></i></span>
+                <span>Setting</span>
+                </a></li>
+                <li class="menu_item"><a href="./new.php">
+                  <span><i class="fa-solid fa-newspaper"></i></span>
+                  <span>Create post</span>
+                  
+                </a></li>
+                <!-- <li class="menu_item"><a href="./statistic/statistic.php">
+                <span><i class="fa-solid fa-chart-simple"></i></span>
+                <span>Statistic</span>
+                </a></li> -->
                 <div class="acc__line"></div>
                 <li class="menu_item">
-                  <button class="logout_us">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Log out</span>
-                  </button>
+                  <a href="../../../controllers/Logout.php">
+                    <button class="logout_us">
+                      <i class="fa-solid fa-right-from-bracket"></i>
+                      <span>Log out</span>
+                    </button>
+                  </a>
                 </li>
               </ul>
             </div>
           </li>
+          <?php else: ?>
+            <div class="logs_buttons">
+            <li class="page_link">
+              <a href="../login.php">
+                <button class="button__comp button__border">Sign in</button>
+              </a>
+            </li>
+            <li class="page_link">
+              <a href="../register.php">
+                <button class="button__comp">Sign up</button>
+              </a>
+            </li>
+          </div>
+          <?php 
+          endif;
+          ?>
         </ul>
       </nav>
     </header>
+
+
+
+
+
+
+
     <main class="setting__content">
       <div class="setting__pages">
         <div class="pages__links">
@@ -97,49 +139,60 @@
         </div>
       </div>
       <div class="profile__setting">
-        <form action="" method="post" class="setting__form">
+        <form action="../../../controllers/ProfileController.php" method="post" class="setting__form" enctype="multipart/form-data">
           <section class="set__prof-content">
             <div class="set__heading">
               <h2>User</h2>
             </div>
             <div class="grid__rows">
               <div class="inp__row">
-                <label for="user__fisrtname">First name</label>
+                <label for="user__firstname">First name</label>
                 <input
                   type="text"
-                  name="user__fisrtname"
-                  id="user__fisrtname"
+                  name="user__firstname"
+                  id="user__firstname"
                   placeholder="First name"
+                  value="<?= $portfolio["firstName"]?>"
                 />
               </div>
               <div class="inp__row">
                 <label for="user__lastname">Last name</label>
-                <input type="text" name="user__lastname" id="user__lastname" placeholder="Last name"/>
+                <input type="text" name="user__lastname" id="user__lastname"  value="<?= $portfolio["lastName"]?>" placeholder="Last name"/>
               </div>
               <div class="inp__row">
                 <label for="user__email">Email</label>
-                <input type="text" name="user__email" id="user__email" placeholder="Email"/>
+                <input type="text" name="user__email" id="user__email"  value="<?= $portfolio["email"]?>" placeholder="Email"/>
               </div>
               <div class="inp__row">
                 <label for="user__username">Username</label>
-                <input type="text" name="user__username" id="user__username" placeholder="Username" />
+                <input type="text" name="user__username" id="user__username"  value="<?= $portfolio["userName"]?>" placeholder="Username" />
               </div>
             </div>
             <div class="user__up-pic">
-              <label for="user__profile-pic">Profile image</label>
+              <label for="userPicture">Profile image</label>
               <div class="set__pic-row">
                 <div class="profile__picture-preview">
+                  <?php 
+
+                  if(isset($portfolio["picture"])): ?>
                   <img
-                    src="../../../../assets/images/users/me.jpg"
+                    src="../../<?= $portfolio["picture"]?>"
                     alt="Ali Yara"
                   />
+                  <?php 
+                  else:
+                    ?>
+                     <span><?= substr($portfolio["firstName"], 0, 1) . substr($portfolio["lastName"], 0, 1) ?></span>
+                     <?php
+                     endif;
+                     ?>
                 </div>
                 <div class="custom-file-input">
-                  <label for="file-upload" class="file-label">
+                  <label for="userPicture" class="file-label">
                     <span class="file-button">Upload File</span>
                     <span class="file-name">No file chosen</span>
                   </label>
-                  <input type="file" id="file-upload" class="file-input" />
+                  <input type="file" id="file-upload" value="<?= $portfolio["picture"]?>" name="userPicture" class="file-input" />
                 </div>
               </div>
             </div>
@@ -151,22 +204,23 @@
             </div>
             <div class="grid__rows">
               <div class="inp__row">
-                <label for="user__fisrtname">Website Link</label>
+                <label for="user__website">Website Link</label>
                 <input
                   type="text"
-                  name="user__fisrtname"
-                  id="user__fisrtname"
-                  placeholder="Website link"
+                  name="user__website"
+                  id="user__website"
+                  placeholder="www.example.com"
+                   value="<?= $portfolio["website"]?>"
                 />
               </div>
               <div class="inp__row">
-                <label for="user__lastname">Work</label>
-                <input type="text" name="user__lastname" id="user__lastname" placeholder="Work"/>
+                <label for="user__work">Work</label>
+                <input type="text" name="user__work" id="user__work"  value="<?= $portfolio["work"]?>" placeholder="Work"/>
               </div>
             </div>
             <div class="user__up-pic">
-              <label for="user__biography">Bio</label>
-              <textarea name="user__biography" id="user__biography" placeholder="bio..."></textarea>
+              <label for="user__bio">Bio</label>
+              <textarea name="user__bio" id="user__bio"  placeholder="bio..."><?= $portfolio["bio"]?></textarea>
             </div>
           </section>
           <div class="submit_btn">

@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if (!isset($_SESSION["user"])) {
+  header("Location: /deV.io/src/views/front/login.php");
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,20 +18,79 @@
     <title>Dev.to platform</title>
   </head>
   <body>
-    <header class="header_content">
+  <header class="header_content">
       <div class="left__side-nav">
         <div class="logo">
           <a href="../index.php">
+
             <h1>Medium</h1>
           </a>
         </div>
-        <div class="search__bar">
-          <input type="text" placeholder="Search for article..." />
-        </div>
+       
       </div>
       <nav class="navbar_content">
         <ul class="links_list">
-          <div class="logs_buttons">
+          <?php 
+
+          if(isset($_SESSION["user"])): ?>
+          
+          <li class="page_link">
+            <a href="../article/new.php">
+              <button class="button__comp">Create Article</button>
+            </a>
+          </li>
+          <li class="page_link">
+            <div class="user_picture user__pic-nav">
+            <div class="u__pic">
+                <?php 
+                if(isset($_SESSION["user"]["userPic"])):?>
+                <img src="../../<?= $_SESSION["user"]["userPic"] ?>" alt="<?= $_SESSION["user"]["fullName"] ?>">
+                <?php 
+                else:
+                  ?>
+                  <span><?= substr($_SESSION["user"]["fullName"], 0, 1) ?></span>
+                  <?php 
+                  endif;
+                  ?>
+              </div>
+            </div>
+            <div class="acc_menu">
+              <ul class="menu_list">
+                <li class="menu_item">
+                  <a href="../profile/user.php" class="acc_us">
+                    <span> Ali Yara </span>
+                    <span> @aliyara29 </span>
+                  </a>
+                </li>
+                <div class="acc__line"></div>
+
+                <li class="menu_item"><a href="../setting/profile.php">
+                <span><i class="fa-solid fa-gear"></i></span>
+                <span>Setting</span>
+                </a></li>
+                <li class="menu_item"><a href="./new.php">
+                  <span><i class="fa-solid fa-newspaper"></i></span>
+                  <span>Create post</span>
+                  
+                </a></li>
+                <!-- <li class="menu_item"><a href="./statistic/statistic.php">
+                <span><i class="fa-solid fa-chart-simple"></i></span>
+                <span>Statistic</span>
+                </a></li> -->
+                <div class="acc__line"></div>
+                <li class="menu_item">
+                  <a href="../../../controllers/Logout.php">
+                    <button class="logout_us">
+                      <i class="fa-solid fa-right-from-bracket"></i>
+                      <span>Log out</span>
+                    </button>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <?php else: ?>
+            <div class="logs_buttons">
             <li class="page_link">
               <a href="../login.php">
                 <button class="button__comp button__border">Sign in</button>
@@ -36,40 +102,9 @@
               </a>
             </li>
           </div>
-          <li class="page_link">
-            <a href="#">
-              <button class="button__comp">Create Article</button>
-            </a>
-          </li>
-          <li class="page_link">
-            <div class="user_picture user__pic-nav">
-              <div class="u__pic">
-                <img src="../../../../assets/images/users/me.jpg" alt="" />
-              </div>
-            </div>
-            <div class="acc_menu">
-              <ul class="menu_list">
-                <li class="menu_item">
-                  <a href="./profile/user.php" class="acc_us">
-                    <span> Ali Yara </span>
-                    <span> @aliyara29 </span>
-                  </a>
-                </li>
-                <div class="acc__line"></div>
-
-                <li class="menu_item"><a href="#">Setting</a></li>
-                <li class="menu_item"><a href="#">Create post</a></li>
-                <li class="menu_item"><a href="#">Statistic</a></li>
-                <div class="acc__line"></div>
-                <li class="menu_item">
-                  <button class="logout_us">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Log out</span>
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </li>
+          <?php 
+          endif;
+          ?>
         </ul>
       </nav>
     </header>

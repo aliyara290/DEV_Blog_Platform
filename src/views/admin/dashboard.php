@@ -1,3 +1,9 @@
+<?php 
+
+require __DIR__ . "/../../controllers/ArticleController.php";
+require __DIR__ . "/../../middleware/Authorisation.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -62,7 +68,14 @@
         <main class="main__content">
             <header class="main__header">
                 <nav class="navbar__content">
-                    <span><i class="fa-solid fa-right-from-bracket"></i></span>
+                <a href="../front/index.php">
+                    <span><i class="fa-solid fa-house"></i></span>
+                </a>
+                <a href="../../controllers/Logout.php">
+                    <span>
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                    </span>
+                </a>
                 </nav>
             </header>
             <div class="project__statistics">
@@ -71,31 +84,65 @@
                 </div>
                 <div class="statistics__cards">
                     <ul class="statistics__list">
-                        <li class="statistic__card">
+                        <!-- <li class="statistic__card">
                             <span><i class="fa-solid fa-user"></i> Users: </span>
-                            <span>123</span>
+                            <span></span>
+                        </li> -->
+                        <li class="statistic__card">
+                            <span><i class="fa-solid fa-newspaper"></i> Active posts: </span>
+                            <span><?= count($articlesActive)?></span>
                         </li>
                         <li class="statistic__card">
-                            <span><i class="fa-solid fa-newspaper"></i> Articles: </span>
-                            <span>123</span>
+                            <span><i class="fa-solid fa-hourglass-start"></i> Pending posts: </span>
+                            <span><?= count($articles)?></span>
                         </li>
                         <li class="statistic__card">
-                            <span><i class="fa-solid fa-hourglass-start"></i> Pending: </span>
-                            <span>123</span>
+                            <span><i class="fa-solid fa-tag"></i> Tags: </span>
+                            <span><?= count($tags)?></span>
                         </li>
                         <li class="statistic__card">
-                            <span><i class="fa-solid fa-user"></i> Users: </span>
-                            <span>123</span>
+                            <span><i class="fa-solid fa-layer-group"></i> Categories: </span>
+                            <span><?= count($categories)?></span>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="statistics_charts">
-                <div class="chart__card"></div>
-                <div class="chart__card"></div>
-                <div class="chart__card"></div>
-                <div class="chart__card"></div>
+            <div class="charts" style="padding: 0 3rem;">
+            <div class="heading">
+                    <h1>Charts</h1>
+                </div>
+                <div class="statistics_charts">
+                    <div class="chart__card"></div>
+                    <div class="chart__card"></div>
+                </div>
             </div>
+            <div class="table-container" style="padding: 0 3rem;">
+            <div class="heading">
+                    <h1>Top 5 articles</h1>
+                </div>
+            <table class="user-table">
+              <thead class="table-head">
+                <tr>
+                  <th class="table-header">title</th>
+                  <th class="table-header">datae posted</th>
+                  <th class="table-header">views</th>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+                <?php 
+
+                foreach($topFive as $five): ?>
+                <tr class="table-row">
+                  <td class="table-data"><?= $five["title"]?></td>
+                  <td class="table-data"><?= date('Y-m-d', strtotime($five["createdAt"])) ?></td>
+                  <td class="table-data"><?= $five["views"] ?></td>
+                </tr>
+                <?php 
+                endforeach;
+                ?>
+              </tbody>
+            </table>
+          </div>
         </main>
     </div>
   </body>

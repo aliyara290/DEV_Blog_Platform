@@ -1,3 +1,10 @@
+<?php 
+require __DIR__ . "/../../controllers/UserController.php";
+if (isset($_SESSION["user"])) {
+    header("Location: /deV.io/src/views/front/index.php");
+    exit();
+  } 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +14,7 @@
     <title>Sign in</title>
 </head>
 <body>
-<?php include "../../includes/header.php" ?>
+<!-- <?php include "../../includes/header.php" ?> -->
     <section class="form__section">
       
           <div class="form__content">
@@ -16,10 +23,10 @@
                     Sign in to your account
                 </h1>
             </div>
-              <form class="log__form" action="login.php">
+              <form class="log__form" action="../../controllers/UserController.php" method="post">
                   <div class="inp__frm">
-                      <label for="login_email">Email</label>
-                      <input type="email" name="login_email" id="login_email" class="" placeholder="email" required="">
+                      <label for="login_identifier">Email or username</label>
+                      <input type="text" name="login_identifier" id="login_identifier" class="" placeholder="email or username" required="">
                   </div>
                   <div class="inp__frm">
                       <label for="login_password" class="">Password</label>
@@ -29,7 +36,7 @@
                       <a href="#" class="">Forgot password?</a>
                   </div>
                   <div class="submit__btn">
-                    <button type="submit" class="">Sign in</button>
+                    <button type="submit" name="login">Sign in</button>
                   </div>
                   <div class="sit__prg">
                     <p>
