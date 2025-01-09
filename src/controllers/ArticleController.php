@@ -113,7 +113,7 @@ class ArticleController
     
     public function deleteArticle()
     {
-        if (isset($_GET["action"]) && isset($_GET["action"]) == "deleteArticle") {
+        if (isset($_GET["action"]) && isset($_GET["articleId"]) && isset($_GET["action"]) == "deleteArticle" ) {
             $articleId = $_GET["articleId"];
             $this->articleModel->deleteArticle($articleId);
         } 
@@ -124,9 +124,9 @@ class ArticleController
     
 }
 $ob = new ArticleController();
+$ob->deleteArticle();
 $ob->createArticle();
 $ob->updateArticle();
-$ob->deleteArticle();
 $ob->countArticles();
 
 $tags = $ob->getAllTags();
