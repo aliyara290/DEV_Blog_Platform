@@ -2,20 +2,20 @@
 
 require __DIR__ . "/../core/Crud.php";
 
-class Categories {
-    public static function createCatgory($value) {
+class Category {
+    public function createCategory($value) {
         return Crud::create("categories", ["categoryName" => $value]);
     }
-    public static function updateCategory($id) {
-        return Crud::update("categories", $column, "id", $id);
+    public function updateCategory($id, $value) {
+        return Crud::update("categories", ["tagName" => $value], "id", $id);
     }
-    public static function deleteCategory($id) {
-        return Crud::delete("categories", $column, $id);
+    public function deleteCategory($id) {
+        return Crud::delete("categories", "categoryId", $id);
     }
-    public static function readAllCatgories() {
+    public function readAllCatgories() {
         return Crud::readAll("categories");
     }
-    public static function countCatgories() {
+    public function countCatgories() {
         return Crud::count("categories");
     }
 }
